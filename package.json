@@ -1,0 +1,31 @@
+{
+  "name": "site-art-bzzzzz",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "dev": "node scripts/astro.mjs dev --ignore-lock",
+    "build": "node scripts/astro.mjs build",
+    "preview": "node scripts/astro.mjs preview --port 4322 --ignore-lock",
+    "check": "node scripts/astro.mjs check",
+    "test": "node --test tests/*.test.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "audit": "pnpm audit",
+    "validate": "pnpm check && pnpm test && pnpm format:check && pnpm build && node scripts/check-dist.mjs",
+    "export": "pnpm validate && node scripts/export.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "typescript": "6.0.3",
+    "prettier": "3.9.8",
+    "prettier-plugin-astro": "1.0.1"
+  }
+}

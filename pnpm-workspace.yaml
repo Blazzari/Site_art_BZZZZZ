@@ -1,0 +1,2 @@
+# Installation scripts from dependencies are disabled by default.
+onlyBuiltDependencies: []

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.pnpm-store/
+exports/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
