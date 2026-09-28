@@ -26,6 +26,6 @@
     "@astrojs/check": "0.9.10",
     "typescript": "6.0.3",
     "prettier": "3.9.8",
-    "prettier-plugin-astro": "1.0.1"
+    "prettier-plugin-astro": "1.1.0"
   }
 }
