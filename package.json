@@ -16,8 +16,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "audit": "pnpm audit",
-    "validate": "pnpm check && pnpm test && pnpm format:check && pnpm build && node scripts/check-dist.mjs",
-    "export": "pnpm validate && node scripts/export.mjs"
+    "validate": "pnpm check && pnpm images:check && pnpm test && pnpm format:check && pnpm build && node scripts/check-dist.mjs",
+    "export": "pnpm validate && node scripts/export.mjs",
+    "images:check": "node scripts/check-images.mjs"
   },
   "dependencies": {
     "astro": "7.3.3"

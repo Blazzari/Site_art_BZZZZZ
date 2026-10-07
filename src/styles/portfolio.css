@@ -1,0 +1,276 @@
+/* Navigation : bouton à gauche sur petits écrans, liens sur grands écrans. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 4.5rem;
+  padding: var(--space-2) var(--gutter);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.home-link,
+.desktop-nav {
+  display: none;
+}
+.home-link,
+.mobile-menu summary {
+  font-size: var(--font-subtitle);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+.mobile-menu summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+}
+.mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+.mobile-menu summary > span {
+  line-height: 1;
+}
+.mobile-menu[open] summary > span {
+  transform: rotate(45deg);
+}
+.mobile-menu nav {
+  position: absolute;
+  inset: 100% 0 auto;
+  max-height: calc(100dvh - 7rem);
+  overflow-y: auto;
+  padding: var(--space-3) var(--gutter) var(--space-4);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-menu nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+.mobile-menu nav a > :last-child {
+  margin-left: auto;
+}
+
+/* Présentation : marges communes à toutes les sections. */
+.about-composition {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap-media);
+  margin-top: var(--gap-copy);
+}
+.about-description {
+  min-width: 0;
+}
+.about-description p + p {
+  margin-top: var(--space-1);
+}
+.portrait {
+  width: min(100%, 21.25rem);
+  margin: 0 auto;
+}
+@media (min-width: 48rem) {
+  .about-composition {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .about-description {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 60ch;
+  }
+  .portrait {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 24rem;
+    margin: 0;
+  }
+}
+.techniques {
+  margin-top: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.techniques h2 {
+  margin-bottom: var(--gap-copy);
+}
+.techniques p {
+  max-width: var(--measure);
+}
+.about-contact {
+  margin-top: var(--space-4);
+}
+/* Contact éditorial : lignes ouvertes, icônes et repères d’action. */
+.contact-heading,
+.contact-location,
+.contact-action {
+  display: flex;
+  align-items: center;
+}
+.contact-heading {
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.contact-location {
+  gap: var(--space-1);
+}
+.contact-actions {
+  display: grid;
+  margin-top: var(--gap-copy);
+  border-top: 1px solid var(--line);
+}
+.contact-action {
+  min-height: 64px;
+  min-width: 0;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.contact-action svg,
+.contact-location svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+.contact-action span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.contact-action .contact-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.contact-action:hover,
+.contact-action:focus-visible {
+  background: var(--surface-hover);
+}
+@media (min-width: 64rem) {
+  .contact-actions {
+    grid-template-columns: 1.4fr 1fr 0.8fr;
+    column-gap: var(--space-5);
+    border-top: 0;
+  }
+  .contact-action {
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* Galeries : proportions originales et centrage, sans hauteur imposée. */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-2);
+  margin-top: var(--gap-media);
+}
+.photo-grid figure {
+  width: 100%;
+  margin: 0;
+  justify-self: center;
+}
+.photo-grid figure:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: calc(50% - var(--space-2) / 2);
+}
+.paris-heading {
+  max-width: none;
+  text-wrap: pretty;
+}
+
+/* Lecture commune : titre, informations et texte, puis images à toute largeur. */
+.project-wide > figure {
+  width: 100%;
+  margin: 0;
+}
+.workshops .shell > figure {
+  width: 100%;
+  margin: var(--gap-media) auto 0;
+  padding: var(--space-2);
+  background: var(--photo-mat);
+}
+.paris-description,
+.workshop-text,
+.project-description,
+.project-location,
+.film .prose {
+  margin-top: var(--gap-copy);
+}
+.closing {
+  border-top: 1px solid var(--line);
+}
+.footer-bottom {
+  margin-top: var(--space-4);
+}
+.footer-bottom a {
+  display: inline-block;
+  min-height: 44px;
+  padding-block: var(--space-1);
+}
+
+@media (min-width: 48rem) {
+  .photo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .photo-grid figure:last-child:nth-child(odd) {
+    grid-column: auto;
+    width: 100%;
+  }
+  .workshop-gallery,
+  .film-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 75rem) {
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .desktop-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+  .desktop-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+  }
+  .desktop-nav a:hover {
+    text-decoration: underline;
+  }
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* Une rubrique commune, alimentée par la liste artProjects. */
+.art-project {
+  margin-top: var(--space-4);
+}
+.art-project + .art-project {
+  margin-top: var(--gap-project);
+}
+.project-wide {
+  margin-top: var(--gap-media);
+}
+
+.practice-contact h2 {
+  font-size: var(--font-subtitle);
+}

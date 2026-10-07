@@ -1,0 +1,30 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/theme.css';
+import '../styles/portfolio.css';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="B.ZZZZ, artiste à Paris. Découvrez ses fleurs dans la ville, ses créations, ses ateliers et ses projets."
+    />
+    <!-- Première version à valider : retirer noindex au lancement public. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f1eee6" />
+    <title>B.ZZZZ — Artiste à Paris</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">
+      Aller au contenu
+    </a>
+    <Header />
+    <main id="contenu">
+      <slot />
+    </main>
+  </body>
+</html>

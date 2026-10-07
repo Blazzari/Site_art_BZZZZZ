@@ -1,0 +1,155 @@
+@font-face {
+  font-family: Archivo;
+  src: url('../assets/fonts/archivo-variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Source unique : trois tailles, une couleur de texte, espacements partagés.
+   Les rem suivent la taille de police choisie dans le navigateur. */
+:root {
+  font-size: 100%;
+  --font-body: 1rem;
+  --font-subtitle: 1.25rem;
+  --font-title: 1.625rem;
+  --leading-body: 1.5;
+  --leading-heading: 1.2;
+  --paper: #f5f2eb;
+  --ink: #000000;
+  --line: #b8b9ac;
+  --photo-mat: #e6dfeb;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --gap-copy: 0.75rem;
+  --gap-media: 1rem;
+  --gap-gallery: clamp(0.75rem, 1.7vw, 1.5rem);
+  --surface-hover: #e8e4db;
+  --gap-project: clamp(2rem, 4vw, 2.5rem);
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --section-space: clamp(1.5rem, 3.5vw, 3rem);
+  --page-width: 77.5rem;
+  --measure: 65ch;
+  font-family: Archivo, Arial, sans-serif;
+  font-synthesis: none;
+  color: var(--ink);
+  background: var(--paper);
+}
+@media (min-width: 48rem) {
+  :root {
+    --font-body: 1.0625rem;
+    --leading-body: 1.45;
+    --font-subtitle: 1.375rem;
+    --font-title: 1.875rem;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+body {
+  margin: 0;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
+}
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+h1,
+h2 {
+  font-size: var(--font-title);
+  font-weight: 600;
+  line-height: var(--leading-heading);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+h3 {
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  line-height: var(--leading-heading);
+}
+p {
+  text-wrap: pretty;
+}
+em {
+  font-style: normal;
+  font-weight: inherit;
+}
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--line);
+  color: var(--ink);
+}
+img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+figure {
+  min-width: 0;
+}
+figcaption {
+  margin-top: var(--space-2);
+}
+.shell {
+  width: min(100%, var(--page-width));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section-space {
+  padding-block: var(--section-space);
+}
+.prose {
+  max-width: var(--measure);
+}
+.prose p + p {
+  margin-top: var(--gap-copy);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: -10rem;
+  left: var(--space-3);
+  padding: var(--space-3);
+  background: var(--paper);
+}
+.skip-link:focus {
+  top: var(--space-3);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

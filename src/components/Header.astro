@@ -1,0 +1,52 @@
+---
+import { artist, navigation } from '../content/portfolio';
+---
+
+<header class="site-header">
+  <a class="home-link" href="#accueil">
+    {artist.name}
+  </a>
+  <nav class="desktop-nav" aria-label="Navigation principale">
+    {navigation.map((item) => (
+      <a href={`#${item.id}`}>{item.label}</a>
+    ))}
+  </nav>
+  <details class="mobile-menu">
+    <summary aria-label="B.ZZZZ — menu de navigation">
+      {artist.name} <span aria-hidden="true">+</span>
+    </summary>
+    <nav aria-label="Navigation mobile">
+      {navigation.map((item, i) => (
+        <a href={`#${item.id}`}>
+          <span class="menu-index" aria-hidden="true">
+            0{i + 1}
+          </span>
+          {item.label}
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </nav>
+  </details>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  menu?.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => {
+      menu.open = false;
+    }),
+  );
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (
+      menu?.open &&
+      event.target instanceof Node &&
+      !menu.contains(event.target)
+    )
+      menu.open = false;
+  });
+</script>

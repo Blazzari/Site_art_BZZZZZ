@@ -1,15 +1,176 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Site_art_BZZZZZ — préparation</title>
-  </head>
-  <body>
-    <main>
-      <h1>Site_art_BZZZZZ</h1>
-      <p>Environnement local prêt. La création du site reste à venir.</p>
-    </main>
-  </body>
-</html>
+---
+import Portfolio from '../layouts/Portfolio.astro';
+import Artwork from '../components/Artwork.astro';
+import Gallery from '../components/Gallery.astro';
+import ContactIcon from '../components/ContactIcon.astro';
+import { gallery } from '../content/gallery';
+import { artProjects } from '../content/art-projects';
+import { artist, about, projects } from '../content/portfolio';
+---
+
+<Portfolio>
+  <div id="accueil">
+    <h1 class="sr-only">{artist.name} — Artiste</h1>
+  </div>
+  <section
+    class="about shell section-space"
+    id="a-propos"
+    aria-labelledby="about-heading"
+  >
+    <h2 id="about-heading">À propos de moi</h2>
+    <div class="about-composition">
+      <div class="prose about-description">
+        {about.paragraphs.map((text) => (
+          <p>{text}</p>
+        ))}
+        <p>{about.signature}</p>
+      </div>
+      <figure class="portrait">
+        <Artwork photo={gallery['portrait'][0]} eager />
+      </figure>
+    </div>
+  </section>
+
+  <section
+    class="paris section-space"
+    id="fleurs-dans-paris"
+    aria-labelledby="paris-heading"
+  >
+    <div class="shell">
+      <h2 id="paris-heading" class="paris-heading">
+        J’ai collé plus de 2000 fleurs dans Paris
+      </h2>
+      <div class="prose paris-description">
+        <p>
+          {projects.paris.intro} {projects.paris.text}
+        </p>
+        <p>
+          {projects.paris.series} « Voir la vie en rose », « Être fleur bleue »
+          ou encore « Arriver comme une fleur ».
+        </p>
+      </div>
+      <Gallery
+        photos={[...gallery['fleurs-paris'], ...gallery['expressions']]}
+        label="Fleurs dans Paris"
+      />
+    </div>
+  </section>
+
+  <section
+    class="practice-contact shell section-space"
+    aria-labelledby="techniques-heading"
+  >
+    <div class="techniques">
+      <h2 id="techniques-heading">Techniques</h2>
+      <p>{about.techniques}</p>
+    </div>
+    <section
+      class="about-contact"
+      id="contact"
+      aria-labelledby="contact-heading"
+    >
+      <div class="contact-heading">
+        <h2 id="contact-heading">Contact</h2>
+        <p class="contact-location">
+          <ContactIcon name="location" />
+          {artist.city}
+        </p>
+      </div>
+      <div class="contact-actions">
+        <a class="contact-action" href={`mailto:${artist.email}`}>
+          <ContactIcon name="email" />
+          <span>
+            {artist.email.split('@')[0]}
+            <wbr />@{artist.email.split('@')[1]}
+          </span>
+          <span class="contact-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+        <a class="contact-action" href={`tel:${artist.phoneLink}`}>
+          <ContactIcon name="phone" />
+          <span>{artist.phone}</span>
+          <span class="contact-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+        <a
+          class="contact-action"
+          href={`https://www.instagram.com/${artist.instagram}/`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram — voir les créations (nouvel onglet)"
+          title="Instagram — voir les créations"
+        >
+          <ContactIcon name="instagram" />
+          <span>Instagram</span>
+          <span class="contact-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </div>
+    </section>
+  </section>
+
+  <section
+    class="film shell section-space"
+    id="documentaire"
+    aria-labelledby="film-heading"
+  >
+    <div>
+      <h2 id="film-heading">{projects.film.title}</h2>
+      <p class="project-location">{projects.film.place}</p>
+      <p class="prose">{projects.film.text}</p>
+    </div>
+    <Gallery photos={gallery.documentaire} label={projects.film.title} />
+  </section>
+
+  <section
+    class="workshops section-space"
+    id="ateliers"
+    aria-labelledby="workshop-heading"
+  >
+    <div class="shell">
+      <h2 id="workshop-heading">{projects.workshop.title}</h2>
+      <p class="prose workshop-text">{projects.workshop.text}</p>
+      <Gallery photos={gallery.ateliers} label={projects.workshop.title} />
+    </div>
+  </section>
+
+  <section
+    id="projets"
+    class="shell section-space projects"
+    aria-labelledby="projects-heading"
+  >
+    <h2 id="projects-heading">Ça fleurit partout</h2>
+    {artProjects.map((project) => (
+      <article
+        id={project.id}
+        class="art-project"
+        aria-labelledby={project.id + '-heading'}
+      >
+        <h3 id={project.id + '-heading'}>{project.title}</h3>
+        {project.location && <p class="project-location">{project.location}</p>}
+        <p class="prose project-description">{project.description}</p>
+        {project.photos.length > 1 ? (
+          <Gallery photos={project.photos} label={project.title} />
+        ) : (
+          <div class="project-wide">
+            {project.photos.map((photo) => (
+              <figure>
+                <Artwork photo={photo} />
+              </figure>
+            ))}
+          </div>
+        )}
+      </article>
+    ))}
+  </section>
+
+  <footer class="shell section-space closing">
+    <h2>Merci</h2>
+    <div class="footer-bottom">
+      <a href="#accueil">Retour en haut ↑</a>
+    </div>
+  </footer>
+</Portfolio>

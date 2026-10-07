@@ -1,0 +1,58 @@
+---
+import Artwork from './Artwork.astro';
+import type { ArtworkPhoto } from '../content/gallery';
+import '../styles/gallery.css';
+interface Props {
+  photos: ArtworkPhoto[];
+  label: string;
+}
+const { photos, label } = Astro.props;
+---
+
+<art-gallery
+  class="gallery"
+  role="region"
+  aria-label={`Galerie — ${label}`}
+  aria-roledescription="carrousel"
+>
+  <div
+    class="gallery-track"
+    tabindex="0"
+    aria-label="Images : faire défiler horizontalement"
+  >
+    {photos.map((photo, index) => (
+      <figure
+        class="gallery-slide"
+        style={`--gallery-image: url("${import.meta.env.BASE_URL}images/${photo.file}")`}
+        role="group"
+        aria-roledescription="diapositive"
+        aria-label={`${index + 1} sur ${photos.length}`}
+      >
+        <Artwork photo={photo} />
+      </figure>
+    ))}
+  </div>
+  {photos.length > 1 && (
+    <div class="gallery-controls" hidden>
+      <button type="button" data-previous aria-label="Image précédente">
+        ←
+      </button>
+      <span class="gallery-count" aria-live="off">
+        1 / {photos.length}
+      </span>
+      <button type="button" data-next aria-label="Image suivante">
+        →
+      </button>
+      <button
+        type="button"
+        data-pause
+        aria-label="Mettre le défilement en pause"
+      >
+        Pause
+      </button>
+    </div>
+  )}
+</art-gallery>
+<script>
+  import '../scripts/gallery';
+</script>

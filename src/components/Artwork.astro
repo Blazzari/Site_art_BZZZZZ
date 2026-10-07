@@ -1,0 +1,21 @@
+---
+import type { ArtworkPhoto } from '../content/gallery';
+
+interface Props {
+  photo: ArtworkPhoto;
+  class?: string;
+  eager?: boolean;
+}
+const { photo, class: className, eager = false } = Astro.props;
+---
+
+<img
+  class={className}
+  src={`${import.meta.env.BASE_URL}images/${photo.file}`}
+  width={photo.width}
+  height={photo.height}
+  alt={photo.alt}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding="async"
+/>

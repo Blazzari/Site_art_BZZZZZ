@@ -1,6 +1,6 @@
 # Project conventions
 
-- This is a static artist portfolio. Artistic direction is not decided yet.
+- This is a static artist portfolio. The first visual draft is under review; preserve the approved French content and single-page section order.
 - Keep components, page layouts, content and styles separate; prefer semantic HTML and plain CSS.
 - No backend, account system, analytics or third-party service without a concrete requirement.
 - Use Node from .node-version and pnpm from package.json; keep the lockfile committed.
