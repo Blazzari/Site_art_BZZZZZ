@@ -28,29 +28,30 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--paper);
+  background: transparent;
   grid-template-rows: minmax(0, 1fr);
   grid-template-columns: minmax(0, 1fr);
 }
-/* La même photo forme un voile décoratif ; l’original reste net et entier. */
+/* Fondu latéral uniquement : hauteur uniforme, photo intacte. */
 .gallery-slide::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: var(--gallery-image);
-  background-size: cover;
-  background-position: center;
-  filter: blur(32px);
-  opacity: 0.16;
-  /* Le halo atteint la transparence avant les bords : aucune découpe carrée. */
-  -webkit-mask-image: radial-gradient(
-    ellipse closest-side,
-    #000 20%,
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgb(55 53 49 / 0.5%) 3%,
+    rgb(55 53 49 / 2%) 7%,
+    rgb(55 53 49 / 3.5%) 12%,
+    rgb(55 53 49 / 4%) 18%,
+    rgb(55 53 49 / 4%) 82%,
+    rgb(55 53 49 / 3.5%) 88%,
+    rgb(55 53 49 / 2%) 93%,
+    rgb(55 53 49 / 0.5%) 97%,
     transparent 100%
   );
-  mask-image: radial-gradient(ellipse closest-side, #000 20%, transparent 100%);
-  pointer-events: none;
 }
 .gallery-track::-webkit-scrollbar {
   display: none;

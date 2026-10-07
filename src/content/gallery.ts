@@ -10,7 +10,7 @@ export const gallery = {
   portrait: [
     {
       file: 'portrait/01.webp',
-      width: 1024,
+      width: 874,
       height: 794,
       alt: 'Portrait de B.ZZZZ tenant une fleur devant son visage.',
     },

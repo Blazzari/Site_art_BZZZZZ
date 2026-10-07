@@ -23,7 +23,6 @@ const { photos, label } = Astro.props;
     {photos.map((photo, index) => (
       <figure
         class="gallery-slide"
-        style={`--gallery-image: url("${import.meta.env.BASE_URL}images/${photo.file}")`}
         role="group"
         aria-roledescription="diapositive"
         aria-label={`${index + 1} sur ${photos.length}`}
