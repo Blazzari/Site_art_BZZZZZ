@@ -15,42 +15,89 @@ const { photos, label } = Astro.props;
   aria-label={`Galerie — ${label}`}
   aria-roledescription="carrousel"
 >
-  <div
-    class="gallery-track"
-    tabindex="0"
-    aria-label="Images : faire défiler horizontalement"
-  >
-    {photos.map((photo, index) => (
-      <figure
-        class="gallery-slide"
-        role="group"
-        aria-roledescription="diapositive"
-        aria-label={`${index + 1} sur ${photos.length}`}
-      >
-        <Artwork photo={photo} />
-      </figure>
-    ))}
-  </div>
-  {photos.length > 1 && (
-    <div class="gallery-controls" hidden>
-      <button type="button" data-previous aria-label="Image précédente">
-        ←
-      </button>
-      <span class="gallery-count" aria-live="off">
-        1 / {photos.length}
-      </span>
-      <button type="button" data-next aria-label="Image suivante">
-        →
-      </button>
-      <button
-        type="button"
-        data-pause
-        aria-label="Mettre le défilement en pause"
-      >
-        Pause
-      </button>
+  <div class="gallery-stage">
+    <div
+      class="gallery-track"
+      tabindex="0"
+      aria-label="Images : faire défiler horizontalement"
+    >
+      {photos.map((photo, index) => (
+        <figure
+          class="gallery-slide"
+          role="group"
+          aria-roledescription="diapositive"
+          aria-label={`${index + 1} sur ${photos.length}`}
+        >
+          <Artwork photo={photo} />
+        </figure>
+      ))}
     </div>
-  )}
+    {photos.length > 1 && (
+      <div class="gallery-controls" hidden>
+        <span class="gallery-count" aria-live="off">
+          1 / {photos.length}
+        </span>
+        <button
+          type="button"
+          data-pause
+          aria-label="Mettre le défilement en pause"
+        >
+          Pause
+        </button>
+        <button
+          type="button"
+          class="gallery-expand"
+          data-expand
+          aria-label="Agrandir la galerie"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
+          </svg>
+        </button>
+        <button type="button" data-previous aria-label="Image précédente">
+          ←
+        </button>
+        <button type="button" data-next aria-label="Image suivante">
+          →
+        </button>
+      </div>
+    )}
+  </div>
+  <dialog class="gallery-dialog" aria-label={`Vue agrandie — ${label}`}>
+    <button
+      type="button"
+      class="gallery-close"
+      data-close
+      aria-label="Fermer la vue agrandie"
+      autofocus
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </dialog>
 </art-gallery>
 <script>
   import '../scripts/gallery';

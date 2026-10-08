@@ -130,6 +130,49 @@ class ArtGallery extends HTMLElement {
       updatePause();
       schedule();
     });
+    const dialog = this.querySelector<HTMLDialogElement>('.gallery-dialog')!;
+    const stage = this.querySelector<HTMLElement>('.gallery-stage')!;
+    const expand = this.querySelector<HTMLButtonElement>('[data-expand]')!;
+    let previousOverflow = '';
+    let returnScroll = 0;
+    let previousMinHeight = '';
+    const expandPath = expand.querySelector('path')!;
+    const outward = expandPath.getAttribute('d')!;
+    expand.addEventListener('click', () => {
+      if (dialog.open) {
+        dialog.close();
+        return;
+      }
+      paused = true;
+      updatePause();
+      clearTimeout(timer);
+      returnScroll = window.scrollY;
+      previousMinHeight = this.style.minHeight;
+      this.style.minHeight = `${this.getBoundingClientRect().height}px`;
+      previousOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      dialog.append(stage);
+      expandPath.setAttribute('d', 'M20 4l-7 7M13 5v6h6M4 20l7-7M5 13h6v6');
+      expand.setAttribute(
+        'aria-label',
+        'Réduire la galerie et revenir au site',
+      );
+      dialog.showModal();
+      move(current, false);
+    });
+    this.querySelector('[data-close]')!.addEventListener('click', () =>
+      dialog.close(),
+    );
+    dialog.addEventListener('close', () => {
+      this.insertBefore(stage, dialog);
+      expandPath.setAttribute('d', outward);
+      expand.setAttribute('aria-label', 'Agrandir la galerie');
+      document.documentElement.style.overflow = previousOverflow;
+      move(current, false);
+      this.style.minHeight = previousMinHeight;
+      expand.focus({ preventScroll: true });
+      window.scrollTo({ top: returnScroll, behavior: 'instant' });
+    });
     this.addEventListener('keydown', (event) => {
       keyboard = true;
       clearTimeout(timer);
