@@ -1,14 +1,19 @@
+/* Dimensions communes aux photos seules et aux carrousels. */
+:root {
+  --media-width: 60rem;
+  --media-height: clamp(16rem, min(52svh, 55vw + 5rem), 30rem);
+}
 /* Cadre stable : les originaux restent entiers, quelle que soit leur proportion. */
 .gallery {
   display: block;
   min-width: 0;
   width: 100%;
-  max-width: 60rem;
+  max-width: var(--media-width);
   overflow: hidden;
   border-radius: 8px;
   background: #ebeae6;
   margin-top: var(--gap-media);
-  --gallery-height: clamp(16rem, min(52svh, 55vw + 5rem), 30rem);
+  --gallery-height: var(--media-height);
 }
 .gallery-track {
   display: flex;
@@ -40,7 +45,7 @@
 .gallery-track::-webkit-scrollbar {
   display: none;
 }
-.gallery-slide img {
+.gallery-slide > :is(img, svg) {
   min-height: 0;
   max-height: 100%;
   width: 100%;

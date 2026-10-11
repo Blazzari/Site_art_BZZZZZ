@@ -9,13 +9,33 @@ interface Props {
 const { photo, class: className, eager = false } = Astro.props;
 ---
 
-<img
-  class={className}
-  src={`${import.meta.env.BASE_URL}images/${photo.file}`}
-  width={photo.width}
-  height={photo.height}
-  alt={photo.alt}
-  loading={eager ? 'eager' : 'lazy'}
-  fetchpriority={eager ? 'high' : 'auto'}
-  decoding="async"
-/>
+{photo.crop ? (
+  <svg
+    class={className}
+    viewBox={`${photo.crop.x} ${photo.crop.y} ${photo.crop.width} ${photo.crop.height}`}
+    width={photo.crop.width}
+    height={photo.crop.height}
+    role="img"
+    aria-label={photo.alt}
+    preserveAspectRatio="xMidYMid meet"
+    style="overflow: hidden"
+  >
+    <image
+      style={`clip-path: inset(${(photo.crop.y / photo.height) * 100}% ${((photo.width - photo.crop.x - photo.crop.width) / photo.width) * 100}% ${((photo.height - photo.crop.y - photo.crop.height) / photo.height) * 100}% ${(photo.crop.x / photo.width) * 100}%); clip-rule: nonzero;`}
+      href={`${import.meta.env.BASE_URL}images/${photo.file}`}
+      width={photo.width}
+      height={photo.height}
+    />
+  </svg>
+) : (
+  <img
+    class={className}
+    src={`${import.meta.env.BASE_URL}images/${photo.file}`}
+    width={photo.width}
+    height={photo.height}
+    alt={photo.alt}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+)}

@@ -1,0 +1,47 @@
+---
+import Artwork from './Artwork.astro';
+import Gallery from './Gallery.astro';
+import ContactIcon from './ContactIcon.astro';
+import type { ArtProject } from '../content/art-projects';
+interface Props {
+  project: ArtProject;
+}
+const { project } = Astro.props;
+---
+
+<article
+  id={project.id}
+  class="art-project"
+  aria-labelledby={project.id + '-heading'}
+>
+  <h3 id={project.id + '-heading'}>{project.title}</h3>
+  {project.location && (
+    <p class="project-location">
+      <ContactIcon name="location" />
+      <span>{project.location}</span>
+    </p>
+  )}
+  <p class="prose project-description">{project.description}</p>
+  {project.photos.length > 1 ? (
+    <Gallery photos={project.photos} label={project.title} />
+  ) : project.photos.length === 1 ? (
+    <div class="project-wide">
+      <figure>
+        <Artwork photo={project.photos[0]} />
+      </figure>
+    </div>
+  ) : null}
+</article>
+
+<style>
+  .project-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .project-location :global(svg) {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+</style>

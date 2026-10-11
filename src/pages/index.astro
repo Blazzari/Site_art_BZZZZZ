@@ -2,6 +2,7 @@
 import Portfolio from '../layouts/Portfolio.astro';
 import Artwork from '../components/Artwork.astro';
 import Gallery from '../components/Gallery.astro';
+import ArtProject from '../components/ArtProject.astro';
 import ContactIcon from '../components/ContactIcon.astro';
 import { gallery } from '../content/gallery';
 import { artProjects } from '../content/art-projects';
@@ -144,26 +145,7 @@ import { artist, about, projects } from '../content/portfolio';
   >
     <h2 id="projects-heading">Ça fleurit partout</h2>
     {artProjects.map((project) => (
-      <article
-        id={project.id}
-        class="art-project"
-        aria-labelledby={project.id + '-heading'}
-      >
-        <h3 id={project.id + '-heading'}>{project.title}</h3>
-        {project.location && <p class="project-location">{project.location}</p>}
-        <p class="prose project-description">{project.description}</p>
-        {project.photos.length > 1 ? (
-          <Gallery photos={project.photos} label={project.title} />
-        ) : (
-          <div class="project-wide">
-            {project.photos.map((photo) => (
-              <figure>
-                <Artwork photo={photo} />
-              </figure>
-            ))}
-          </div>
-        )}
-      </article>
+      <ArtProject project={project} />
     ))}
   </section>
 

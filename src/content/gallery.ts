@@ -4,6 +4,8 @@ export interface ArtworkPhoto {
   width: number;
   height: number;
   alt: string;
+  /** Fenêtre de cadrage en pixels, sans modifier la photographie source. */
+  crop?: { x: number; y: number; width: number; height: number };
 }
 
 export const gallery = {
@@ -99,10 +101,23 @@ export const gallery = {
   ],
   'mur-curiosites': [
     {
-      file: 'mur-curiosites/01.webp',
+      file: 'mur-curiosites/02.webp',
+      crop: { x: 220, y: 420, width: 460, height: 620 },
       width: 900,
       height: 1600,
-      alt: 'Mur des curiosités : bouquet en relief et vase jaune au-dessus de plantes.',
+      alt: 'Bouquet de fleurs en relief et vase jaune sur le Mur des curiosités.',
+    },
+    {
+      file: 'mur-curiosites/01.webp',
+      width: 1200,
+      height: 1600,
+      alt: 'B.ZZZZ installe des fleurs au Mur des curiosités, au-dessus des jardinières.',
+    },
+    {
+      file: 'mur-curiosites/03.webp',
+      width: 1200,
+      height: 1600,
+      alt: 'B.ZZZZ de dos, en train de composer le bouquet sur le Mur des curiosités.',
     },
   ],
   ateliers: [

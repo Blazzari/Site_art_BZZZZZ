@@ -1,14 +1,21 @@
-import { gallery } from './gallery';
+import { gallery, type ArtworkPhoto } from './gallery';
+
+export interface ArtProject {
+  id: string;
+  title: string;
+  location: string;
+  description: string;
+  photos: ArtworkPhoto[];
+}
 import { projects } from './portfolio';
 
 // Ajouter un objet ici pour publier un nouveau projet dans cette rubrique.
-export const artProjects = [
+export const artProjects: ArtProject[] = [
   {
     id: 'mur-des-curiosites',
-    title: 'Mur des curiosités — Paris XIX',
-    location: '',
+    title: 'Mur des curiosités',
+    location: 'Paris XIX',
     description: projects.wall.text,
-    layout: 'wide' as const,
     photos: gallery['mur-curiosites'],
   },
   {
@@ -17,7 +24,6 @@ export const artProjects = [
     location: 'Utrecht, Pays-Bas',
     description:
       'Réalisation d’un mur pour sensibiliser à l’environnement et aux abeilles dans la ville d’Utrecht en 2022.',
-    layout: 'gallery' as const,
     photos: gallery['bee-project'],
   },
 ];

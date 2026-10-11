@@ -275,7 +275,21 @@
   margin-top: var(--gap-project);
 }
 .project-wide {
+  width: 100%;
+  max-width: var(--media-width);
   margin-top: var(--gap-media);
+  background: #ebeae6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.project-wide > figure {
+  height: var(--media-height);
+}
+.project-wide :is(img, svg) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .practice-contact h2 {
