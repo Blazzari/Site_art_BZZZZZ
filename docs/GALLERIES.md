@@ -1,20 +1,22 @@
 # Galeries réutilisables
 
-`src/components/Gallery.astro` reçoit `photos: ArtworkPhoto[]` et `label`.
-Les fichiers, dimensions et descriptions restent dans `src/content/gallery.ts`.
-Les projets à plusieurs images utilisent automatiquement cette présentation.
-Aucune copie des fichiers sources, aucun service externe ni dépendance ajoutée.
+`Gallery.astro` reçoit `photos: ArtworkPhoto[]` et `label`. Le catalogue central
+reste dans `src/content/gallery.ts` ; `ArtProject.astro` sélectionne une image
+fixe ou une galerie selon le nombre de photos. Le cadre conserve sa hauteur
+pendant les transitions, avec images centrées et proportions préservées. Seules
+les entrées dotées d’un `crop` utilisent un cadrage explicite.
 
-Le cadre conserve sa hauteur à chaque breakpoint. Les images utilisent contain,
-centrées sur un fond légèrement nuancé, sans recadrage. Les copies de bord servant
-à la boucle sont masquées aux technologies d’assistance.
+Le défilement horizontal est natif : la molette verticale n’est jamais détournée.
+Les flèches permettent la navigation au clic et au clavier. La rotation attend
+2,917 secondes entre déplacements et au moins 5 secondes après manipulation.
+Elle s’arrête hors écran, dans un onglet caché, après une pause explicite et
+lorsque la préférence de réduction des animations est activée.
 
-Le défilement horizontal est natif : aucun gestionnaire ne détourne la molette
-verticale. Les flèches fonctionnent au clic et au clavier. Lecture automatique
-à 3,5 secondes, reprise au moins 5 secondes après manipulation. Pause explicite,
-réduction des animations, onglet caché et navigation clavier suspendent la lecture.
-Une galerie hors écran ne tourne pas. Sans JavaScript, toutes les photos restent
-accessibles par défilement horizontal.
+L’entrée au clavier suspend la rotation jusqu’à une demande explicite de Lecture.
+Les copies de bord sont inertes et cachées aux technologies d’assistance.
+Sans JavaScript, les images restent accessibles par défilement horizontal.
+La vue agrandie utilise un dialogue natif : croix, bouton de réduction ou Échap
+ferment la vue et rendent le focus au bouton d’ouverture.
 
-À vérifier sur appareil réel avant publication : geste diagonal iOS/Android,
-reprise après inertie, zoom système et navigation au lecteur d’écran.
+À vérifier sur appareil réel : gestes diagonaux et inertie iOS/Android, zoom
+système, lecteur d’écran et confort des commandes avec les barres du navigateur.

@@ -40,6 +40,29 @@ for (const photo of Object.values(gallery).flat()) {
   registered.add(photo.file);
   const buffer = await readFile(new URL(photo.file, root));
   assert.deepEqual(dimensions(buffer), [photo.width, photo.height], photo.file);
+  if (photo.crop) {
+    const { x, y, width, height } = photo.crop;
+    assert.ok([x, y, width, height].every(Number.isInteger), photo.file);
+    assert.ok(x >= 0 && y >= 0 && width > 0 && height > 0, photo.file);
+    assert.ok(
+      x + width <= photo.width && y + height <= photo.height,
+      photo.file,
+    );
+  }
+  // Check actual WebP chunks, not arbitrary byte matches inside compressed pixels.
+  for (let offset = 12; offset + 8 <= buffer.length;) {
+    const type = buffer.toString('ascii', offset, offset + 4);
+    const size = buffer.readUInt32LE(offset + 4);
+    assert.ok(
+      offset + 8 + size <= buffer.length,
+      'Truncated WebP: ' + photo.file,
+    );
+    assert.ok(
+      !['EXIF', 'XMP '].includes(type),
+      'Private metadata: ' + photo.file,
+    );
+    offset += 8 + size + (size % 2);
+  }
   bytes += buffer.length;
   if (buffer.length > 500 * 1024)
     console.warn(`Review image weight: ${photo.file}`);

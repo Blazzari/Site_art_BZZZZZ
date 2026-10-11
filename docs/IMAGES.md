@@ -1,38 +1,38 @@
-# Images — organisation et audit du 4 octobre 2026
+# Images — catalogue et maintenance
 
-## Où sont les images ?
+Le catalogue `src/content/gallery.ts` référence les 28 WebP publiés dans
+`public/images/<rubrique>/<sujet>.webp`. Les noms décrivent le contenu ; seul
+l’ordre des tableaux détermine la position dans les carrousels. Les fichiers
+proviennent du portfolio PDF et des trois photographies fournies pour le Mur des
+curiosités. Les archives dans `reference/images-unused` ne sont pas publiées.
 
-- `public/images/<rubrique>/` : uniquement les 26 WebP utilisés par le site. Rubriques : portrait, fleurs-paris, expressions, mur-curiosites, ateliers, documentaire et bee-project.
-- `src/content/gallery.ts` : catalogue unique typé, avec chemin relatif, dimensions natives et texte alternatif.
-- `src/components/Artwork.astro` : rendu commun, dimensions HTML, texte alternatif, chargement différé et chemin compatible avec un changement de domaine ou de propriétaire GitHub.
-- `src/content/art-projects.ts` : projets et galeries associées.
-- `reference/images-unused/` : cinq anciennes versions et un QR inutilisé, conservés pour référence, hors du répertoire public et du build.
+Chaque entrée contient `file`, `width`, `height`, `alt`, et éventuellement `crop`
+(une fenêtre en pixels de la source). Le bouquet et le vase restent la première
+image du Mur des curiosités. Son cadrage est rendu sans modifier la photographie.
 
-Les dossiers correspondent aux anciennes pages PDF 2 à 8, dans cet ordre. Les fichiers 01, 02… conservent l’ordre d’extraction. Le PDF est la source provisoire ; ne pas considérer les WebP comme les originaux de l’artiste.
+Pour ajouter une photo : partir de l’original, exporter un WebP sans EXIF/GPS/XMP,
+conserver proportions et couleurs, choisir un nom descriptif stable, renseigner
+le catalogue et lancer `pnpm images:check` puis `pnpm validate`. Conserver les
+originaux séparément. Ne pas agrandir artificiellement les petites sources.
 
-## Ajouter ou remplacer une photo
+Le contrôle vérifie présence, dimensions natives, noms, unicité, alternatives
+textuelles, limites du cadrage, absence de métadonnées EXIF/XMP et absence de
+fichiers publics oubliés du catalogue. Un fichier de plus de 500 Kio est signalé
+pour revue ; ce repère interne n’est pas une norme.
 
-1. Partir du fichier original, conserver une copie maître hors du site public. Vérifier les droits et le crédit.
-2. Exporter un WebP sans GPS/EXIF, en conservant les couleurs et les proportions ; ne pas agrandir artificiellement une petite source.
-3. Ranger le fichier dans sa rubrique avec un nom stable. Mettre à jour son entrée dans gallery.ts : dimensions réelles et description utile. L’ordre du tableau définit l’ordre des photos.
-4. Pour un nouveau projet, ajouter sa galerie puis son entrée dans art-projects.ts.
-5. Lancer `pnpm images:check`, puis `pnpm validate` et regarder mobile/desktop.
+## Qualité et limites
 
-Le contrôle automatique détecte les fichiers manquants, dimensions incorrectes, entrées dupliquées, descriptions vides et fichiers publics non catalogués. Il signale les fichiers dépassant 500 Kio ; ce seuil est un repère interne, pas une norme UX.
+Les 28 images totalisent environ 4,99 Mio, ce qui ne correspond pas au poids du
+chargement initial. Les images HTML utilisent le chargement différé, sauf le
+portrait prioritaire. Le cadrage SVG du vase n’a pas de chargement différé natif.
+Les fichiers sont servis à leur définition native, sans variantes `srcset`.
 
-## Qualité et poids
+Les sources issues du PDF sont parfois petites (492 px de large au minimum) :
+le mode agrandi sur écran haute densité ne peut pas recréer leurs détails.
+Privilégier les originaux pour les futures mises à jour, notamment les ateliers,
+BEE Project et petites photos de rue. Les textes essentiels d’une affiche doivent
+également figurer dans le contenu HTML pour rester lisibles et accessibles.
 
-Inspection de la planche des 27 images extraites et contrôle des 32 WebP initiaux : fichiers lisibles, pas de métadonnées EXIF/GPS détectées. Le dossier public contenait environ 5,18 Mio avant nettoyage, dont environ 1,10 Mio inutilisé. Les 26 images affichées représentent environ 4,08 Mio au total, hors police et code. Ce total ne correspond pas au téléchargement initial : le chargement est différé, sauf le portrait.
-
-Qualité suffisante pour la maquette mobile, inégale pour une présentation définitive sur écran haute densité. Les sources vont de 492 à 1600 px de large. Priorités de remplacement :
-
-- Mur des curiosités : 900 × 1600, affiché jusqu’à environ 1125 px de large ; agrandissement même à densité 1, aggravé sur écran Retina. Le cadrage CSS 16/10 desktop et 4/5 mobile recoupe la photo verticale ; l’œuvre est centrée à 50 % / 42 %. Demander une vue horizontale originale pour le desktop.
-- Atelier principal : 903 × 605, également agrandi en pleine largeur desktop.
-- Galeries : certaines sources de 492–645 px ne couvrent pas deux fois leur largeur affichée. Le BEE Project et les expressions sont à revoir avec les originaux.
-- Affiche d’atelier : texte incorporé à l’image, petit sur mobile ; les informations essentielles d’un futur atelier devront aussi être présentes en HTML.
-
-Les images de murs texturés pèsent jusqu’à environ 424 Kio ; le détail de la matière explique une partie du poids. Pas de recompression aveugle ni de retouche des œuvres dans cet audit.
-
-## Limites avant publication
-
-Le composant sert encore un seul fichier par photo : absence de srcset/sizes, donc les petits écrans peuvent charger un fichier plus grand que nécessaire. Prochaine amélioration de performance : génération automatique de variantes depuis les originaux, en gardant ce catalogue et ce composant comme points d’entrée. Aucun test réseau mobile ni mesure LCP/CLS en conditions réelles dans cet audit. L’inspection de la planche ne constitue pas une expertise de netteté à 100 % pour chaque fichier. Vérifier crédits, autorisations des personnes photographiées et qualité sur téléphone réel avant publication.
+L’audit de structure ne remplace pas une validation artistique des sources, des
+crédits et des autorisations. Aucun filtre, agrandissement ou recompression des
+photographies n’a été appliqué pendant le nettoyage du 11 octobre 2026.

@@ -17,7 +17,6 @@ class ArtGallery extends HTMLElement {
     let paused = motion.matches;
     let visible = false;
     let held = false;
-    let keyboard = false;
     let current = 1;
     let idleUntil = 0;
     let timer: ReturnType<typeof setTimeout>;
@@ -45,7 +44,7 @@ class ArtGallery extends HTMLElement {
     };
     const schedule = () => {
       clearTimeout(timer);
-      if (!visible || paused || held || keyboard || document.hidden) return;
+      if (!visible || paused || held || document.hidden) return;
       timer = setTimeout(
         () => move(current + 1),
         Math.max(2917, idleUntil - Date.now()),
@@ -177,8 +176,11 @@ class ArtGallery extends HTMLElement {
       window.scrollTo({ top: returnScroll, behavior: 'instant' });
     });
     this.addEventListener('keydown', (event) => {
-      keyboard = true;
-      clearTimeout(timer);
+      if (event.key === 'Tab' || event.target === track) {
+        paused = true;
+        updatePause();
+        clearTimeout(timer);
+      }
       if (
         event.target === track &&
         ['ArrowLeft', 'ArrowRight'].includes(event.key)
@@ -196,16 +198,21 @@ class ArtGallery extends HTMLElement {
         );
       }
     });
-    this.addEventListener('focusout', (event) => {
-      if (!this.contains(event.relatedTarget as Node)) {
-        keyboard = false;
-        schedule();
+    // Keyboard entry pauses until an explicit press on Lecture; touch keeps idle resume.
+    this.addEventListener('focusin', (event) => {
+      if (
+        event.target instanceof HTMLElement &&
+        event.target.matches(':focus-visible')
+      ) {
+        paused = true;
+        updatePause();
+        clearTimeout(timer);
       }
     });
     motion.addEventListener(
       'change',
       () => {
-        paused = motion.matches;
+        if (motion.matches) paused = true;
         updatePause();
         schedule();
       },
@@ -216,7 +223,7 @@ class ArtGallery extends HTMLElement {
     });
     const observer = new IntersectionObserver(
       ([entry]) => {
-        visible = entry.isIntersecting;
+        visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
         schedule();
       },
       { threshold: 0.25 },

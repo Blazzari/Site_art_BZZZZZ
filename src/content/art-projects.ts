@@ -1,4 +1,5 @@
 import { gallery, type ArtworkPhoto } from './gallery';
+import { projects } from './portfolio';
 
 export interface ArtProject {
   id: string;
@@ -7,7 +8,6 @@ export interface ArtProject {
   description: string;
   photos: ArtworkPhoto[];
 }
-import { projects } from './portfolio';
 
 // Ajouter un objet ici pour publier un nouveau projet dans cette rubrique.
 export const artProjects: ArtProject[] = [
