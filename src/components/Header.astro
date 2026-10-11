@@ -15,6 +15,7 @@ import { artist, navigation } from '../content/portfolio';
     <summary aria-label="B.ZZZZ — menu de navigation">
       {artist.name} <span aria-hidden="true">+</span>
     </summary>
+    <div class="menu-backdrop" aria-hidden="true"></div>
     <nav aria-label="Navigation mobile">
       {navigation.map((item, i) => (
         <a href={`#${item.id}`}>
@@ -30,6 +31,10 @@ import { artist, navigation } from '../content/portfolio';
 </header>
 <script>
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  menu?.querySelector('.menu-backdrop')?.addEventListener('click', () => {
+    menu.open = false;
+    menu.querySelector('summary')?.focus();
+  });
   menu?.querySelectorAll('a').forEach((link) =>
     link.addEventListener('click', () => {
       menu.open = false;

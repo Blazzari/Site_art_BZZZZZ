@@ -144,6 +144,7 @@
   justify-content: center;
   gap: 0;
   align-self: flex-end;
+  margin: 8px;
   flex-shrink: 0;
   min-height: 44px;
   width: 44px;
@@ -174,4 +175,34 @@
 }
 .gallery-dialog .gallery-controls {
   flex-shrink: 0;
+}
+
+/* Mobile portrait : rapprocher la croix, la photo et les commandes. */
+@media (max-width: 767px) and (orientation: portrait) {
+  .gallery-dialog[open] {
+    justify-content: center;
+  }
+  .gallery-dialog .gallery-close {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+  }
+  .gallery-dialog .gallery-stage {
+    flex: 0 1 auto;
+    height: calc(56dvh + 60px);
+    max-height: 100%;
+  }
+  .gallery-dialog .gallery-controls {
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+  }
+  .gallery-dialog .gallery-controls button {
+    min-width: 48px;
+    min-height: 48px;
+  }
+  .gallery-dialog .gallery-expand {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
 }

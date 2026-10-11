@@ -36,6 +36,8 @@ class ArtGallery extends HTMLElement {
       (track.clientWidth - slides[index].clientWidth) / 2;
     const move = (index: number, smooth = true) => {
       current = index;
+      // Afficher la destination dès le départ, y compris lors du bouclage.
+      counter.textContent = `${((index - 1 + count) % count) + 1} / ${count}`;
       track.scrollTo({
         left: target(index),
         behavior: smooth && !motion.matches ? 'smooth' : 'instant',
@@ -46,7 +48,7 @@ class ArtGallery extends HTMLElement {
       if (!visible || paused || held || keyboard || document.hidden) return;
       timer = setTimeout(
         () => move(current + 1),
-        Math.max(3500, idleUntil - Date.now()),
+        Math.max(2917, idleUntil - Date.now()),
       );
     };
     const interact = () => {
@@ -132,6 +134,7 @@ class ArtGallery extends HTMLElement {
     });
     const dialog = this.querySelector<HTMLDialogElement>('.gallery-dialog')!;
     const stage = this.querySelector<HTMLElement>('.gallery-stage')!;
+    const close = this.querySelector<HTMLButtonElement>('[data-close]')!;
     const expand = this.querySelector<HTMLButtonElement>('[data-expand]')!;
     let previousOverflow = '';
     let returnScroll = 0;
@@ -151,6 +154,7 @@ class ArtGallery extends HTMLElement {
       this.style.minHeight = `${this.getBoundingClientRect().height}px`;
       previousOverflow = document.documentElement.style.overflow;
       document.documentElement.style.overflow = 'hidden';
+      stage.prepend(close);
       dialog.append(stage);
       expandPath.setAttribute('d', 'M20 4l-7 7M13 5v6h6M4 20l7-7M5 13h6v6');
       expand.setAttribute(
@@ -160,10 +164,9 @@ class ArtGallery extends HTMLElement {
       dialog.showModal();
       move(current, false);
     });
-    this.querySelector('[data-close]')!.addEventListener('click', () =>
-      dialog.close(),
-    );
+    close.addEventListener('click', () => dialog.close());
     dialog.addEventListener('close', () => {
+      dialog.append(close);
       this.insertBefore(stage, dialog);
       expandPath.setAttribute('d', outward);
       expand.setAttribute('aria-label', 'Agrandir la galerie');
