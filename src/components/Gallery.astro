@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from './ArrowIcon.astro';
 import Artwork from './Artwork.astro';
 import type { ArtworkPhoto } from '../content/gallery';
 import '../styles/gallery.css';
@@ -66,10 +67,10 @@ const { photos, label } = Astro.props;
           </svg>
         </button>
         <button type="button" data-previous aria-label="Image précédente">
-          ←
+          <ArrowIcon direction="left" />
         </button>
         <button type="button" data-next aria-label="Image suivante">
-          →
+          <ArrowIcon direction="right" />
         </button>
       </div>
     )}

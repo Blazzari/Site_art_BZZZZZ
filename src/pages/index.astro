@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from '../components/ArrowIcon.astro';
 import Portfolio from '../layouts/Portfolio.astro';
 import Artwork from '../components/Artwork.astro';
 import Gallery from '../components/Gallery.astro';
@@ -84,16 +85,12 @@ import { artist, about, projects } from '../content/portfolio';
             {artist.email.split('@')[0]}
             <wbr />@{artist.email.split('@')[1]}
           </span>
-          <span class="contact-arrow" aria-hidden="true">
-            ↗
-          </span>
+          <ArrowIcon class="contact-arrow" />
         </a>
         <a class="contact-action" href={`tel:${artist.phoneLink}`}>
           <ContactIcon name="phone" />
           <span>{artist.phone}</span>
-          <span class="contact-arrow" aria-hidden="true">
-            ↗
-          </span>
+          <ArrowIcon class="contact-arrow" />
         </a>
         <a
           class="contact-action"
@@ -105,9 +102,7 @@ import { artist, about, projects } from '../content/portfolio';
         >
           <ContactIcon name="instagram" />
           <span>Instagram</span>
-          <span class="contact-arrow" aria-hidden="true">
-            ↗
-          </span>
+          <ArrowIcon class="contact-arrow" />
         </a>
       </div>
     </section>
@@ -152,7 +147,9 @@ import { artist, about, projects } from '../content/portfolio';
   <footer class="shell section-space closing">
     <h2>Merci !</h2>
     <div class="footer-bottom">
-      <a href="#accueil">Retour en haut ↑</a>
+      <a href="#accueil">
+        Retour en haut <ArrowIcon direction="up" />
+      </a>
     </div>
   </footer>
 </Portfolio>

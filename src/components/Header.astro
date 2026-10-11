@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from './ArrowIcon.astro';
 import { artist, navigation } from '../content/portfolio';
 ---
 
@@ -23,7 +24,7 @@ import { artist, navigation } from '../content/portfolio';
             0{i + 1}
           </span>
           {item.label}
-          <span aria-hidden="true">↗</span>
+          <ArrowIcon />
         </a>
       ))}
     </nav>

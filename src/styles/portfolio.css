@@ -67,6 +67,7 @@
 }
 .mobile-menu nav a > :last-child {
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* Présentation : marges communes à toutes les sections. */
@@ -222,7 +223,9 @@
   margin-top: var(--space-4);
 }
 .footer-bottom a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   min-height: 44px;
   padding-block: var(--space-1);
 }
