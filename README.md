@@ -29,7 +29,6 @@ l’interface loopback. `pnpm export` produit une copie validée dans `exports/s
 | `src/styles`                 | Thème, composition du site et galerie                      |
 | `src/scripts`                | Interactions de la galerie                                 |
 | `public/images`              | WebP publiés, classés par rubrique et nommés par sujet     |
-| `reference`                  | Archives non publiées                                      |
 | `scripts`, `tests`, `config` | Validation, export et configuration du déploiement         |
 | `docs`                       | Guides de contenu et comptes rendus d’audit                |
 
@@ -58,3 +57,15 @@ La configuration déduit l’URL et le sous-répertoire du dépôt GitHub. Les v
 facultatives `SITE_URL` et `BASE_PATH` permettent un domaine personnalisé. Les
 composants utilisent `BASE_URL` pour leurs ressources ; ne pas coder une adresse
 GitHub ou un chemin local dans les contenus.
+
+## Entretien du dépôt
+
+Les dossiers `node_modules`, `dist`, `.astro` et `exports` sont générés localement
+et exclus de Git. Les anciens essais sont conservés dans l’historique Git, pas
+dans un dossier d’archives du projet. Aucun fichier `.gitkeep` n’est nécessaire
+dans un dossier qui contient déjà des fichiers suivis.
+
+La typographie et les espacements sont définis dans `src/styles/theme.css` :
+texte à 16 px sur mobile, 17 px dès 48rem (avec une racine navigateur à 16 px).
+Les styles de composition et de galerie restent dans leurs feuilles respectives.
+La licence Archivo dans `public/fonts/OFL-Archivo.txt` doit être conservée.

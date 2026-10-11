@@ -4,7 +4,8 @@ Le catalogue `src/content/gallery.ts` référence les 28 WebP publiés dans
 `public/images/<rubrique>/<sujet>.webp`. Les noms décrivent le contenu ; seul
 l’ordre des tableaux détermine la position dans les carrousels. Les fichiers
 proviennent du portfolio PDF et des trois photographies fournies pour le Mur des
-curiosités. Les archives dans `reference/images-unused` ne sont pas publiées.
+curiosités. Les anciennes images inutilisées ont été retirées du dépôt courant ; elles restent
+récupérables dans l’historique Git.
 
 Chaque entrée contient `file`, `width`, `height`, `alt`, et éventuellement `crop`
 (une fenêtre en pixels de la source). Le bouquet et le vase restent la première
