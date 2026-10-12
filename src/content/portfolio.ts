@@ -47,6 +47,7 @@ export const projects = {
   },
   workshop: {
     title: 'Atelier d’initiation et de création',
+    place: 'Paris X',
     text: 'J’organise également des ateliers pour petits et grands afin de créer, de se rassembler autour de l’art et de construire de beaux bouquets muraux où chacun met sa graine.',
   },
   film: {

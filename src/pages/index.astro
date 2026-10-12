@@ -115,7 +115,10 @@ import { artist, about, projects } from '../content/portfolio';
   >
     <div>
       <h2 id="film-heading">{projects.film.title}</h2>
-      <p class="project-location">{projects.film.place}</p>
+      <p class="project-location">
+        <ContactIcon name="location" />
+        <span>{projects.film.place}</span>
+      </p>
       <p class="prose">{projects.film.text}</p>
     </div>
     <Gallery photos={gallery.documentaire} label={projects.film.title} />
@@ -128,6 +131,10 @@ import { artist, about, projects } from '../content/portfolio';
   >
     <div class="shell">
       <h2 id="workshop-heading">{projects.workshop.title}</h2>
+      <p class="project-location">
+        <ContactIcon name="location" />
+        <span>{projects.workshop.place}</span>
+      </p>
       <p class="prose workshop-text">{projects.workshop.text}</p>
       <Gallery photos={gallery.ateliers} label={projects.workshop.title} />
     </div>

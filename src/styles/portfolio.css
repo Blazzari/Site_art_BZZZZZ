@@ -298,3 +298,15 @@
 .practice-contact h2 {
   font-size: var(--font-subtitle);
 }
+
+/* Localisation commune aux projets, au documentaire et aux ateliers. */
+.project-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.project-location svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
