@@ -140,7 +140,7 @@ class ArtGallery extends HTMLElement {
     let previousMinHeight = '';
     const expandPath = expand.querySelector('path')!;
     const outward = expandPath.getAttribute('d')!;
-    expand.addEventListener('click', (event) => {
+    expand.addEventListener('click', () => {
       if (dialog.open) {
         dialog.close();
         return;
@@ -160,8 +160,6 @@ class ArtGallery extends HTMLElement {
         'aria-label',
         'Réduire la galerie et revenir au site',
       );
-      // Keep focus inside the dialog without a keyboard ring after a touch/click.
-      dialog.toggleAttribute('data-pointer-open', event.detail > 0);
       dialog.showModal();
       move(current, false);
     });
@@ -178,7 +176,6 @@ class ArtGallery extends HTMLElement {
       window.scrollTo({ top: returnScroll, behavior: 'instant' });
     });
     this.addEventListener('keydown', (event) => {
-      dialog.removeAttribute('data-pointer-open');
       if (event.key === 'Tab' || event.target === track) {
         paused = true;
         updatePause();

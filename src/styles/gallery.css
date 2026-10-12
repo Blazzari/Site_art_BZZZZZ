@@ -88,9 +88,8 @@
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
-.gallery :focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: -3px;
+.gallery :focus {
+  outline: none;
 }
 
 .gallery-controls .gallery-expand {
@@ -212,14 +211,9 @@
   }
 }
 
-/* iOS may mark the automatically focused close button as focus-visible.
-   Hide only that initial pointer ring; any keyboard interaction restores it. */
+/* Même bordure pour les commandes au repos et après interaction. */
 .gallery-controls button,
 .gallery-close {
   -webkit-appearance: none;
   appearance: none;
-}
-.gallery button:focus:not(:focus-visible),
-.gallery-dialog[data-pointer-open] .gallery-close:focus {
-  outline: none;
 }
