@@ -21,9 +21,9 @@ export const artProjects: ArtProject[] = [
   {
     id: 'bee-project',
     title: 'BEE Project (beeepostive)',
-    location: 'Utrecht, Pays-Bas',
+    location: 'Utrecht, Pays-Bas, 2022',
     description:
-      'Réalisation d’un mur pour sensibiliser à l’environnement et aux abeilles dans la ville d’Utrecht en 2022.',
+      'Réalisation d’un mur pour sensibiliser à l’environnement et aux abeilles.',
     photos: gallery['bee-project'],
   },
 ];
