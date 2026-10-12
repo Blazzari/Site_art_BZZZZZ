@@ -211,3 +211,15 @@
     flex-basis: 48px;
   }
 }
+
+/* iOS may mark the automatically focused close button as focus-visible.
+   Hide only that initial pointer ring; any keyboard interaction restores it. */
+.gallery-controls button,
+.gallery-close {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.gallery button:focus:not(:focus-visible),
+.gallery-dialog[data-pointer-open] .gallery-close:focus {
+  outline: none;
+}
