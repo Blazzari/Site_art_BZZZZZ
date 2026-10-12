@@ -51,7 +51,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  scroll-padding-top: calc(var(--header-height, 4.5rem) + 0.75rem);
 }
 body {
   margin: 0;
@@ -153,4 +153,9 @@ figcaption {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Les ancres de section visent le titre, en compensant son espace intérieur. */
+.section-space[id] {
+  scroll-margin-top: calc(var(--section-gap) / -2);
 }

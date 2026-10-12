@@ -11,7 +11,6 @@ export const artist = {
 
 export const navigation = [
   { id: 'a-propos', label: 'À propos de moi' },
-  { id: 'fleurs-dans-paris', label: 'Fleurs dans Paris' },
   { id: 'documentaire', label: 'Documentaire' },
   { id: 'ateliers', label: 'Ateliers' },
   { id: 'projets', label: 'Ça fleurit partout' },
