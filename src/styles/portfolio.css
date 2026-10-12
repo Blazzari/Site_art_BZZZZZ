@@ -106,9 +106,7 @@
     margin: 0;
   }
 }
-.techniques {
-  margin-top: 0;
-  padding-top: var(--space-4);
+.practice-contact {
   border-top: 1px solid var(--line);
 }
 .techniques h2 {

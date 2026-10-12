@@ -28,9 +28,9 @@
   --gap-media: 1rem;
   --gap-gallery: clamp(0.75rem, 1.7vw, 1.5rem);
   --surface-hover: #e8e4db;
-  --gap-project: clamp(2rem, 4vw, 2.5rem);
+  --gap-project: clamp(1.5rem, 3vw, 2.5rem);
   --gutter: clamp(1.25rem, 4vw, 5rem);
-  --section-space: clamp(1.5rem, 3.5vw, 3rem);
+  --section-gap: clamp(2rem, 4vw, 3.5rem);
   --page-width: 77.5rem;
   --measure: 65ch;
   font-family: Archivo, Arial, sans-serif;
@@ -121,7 +121,8 @@ figcaption {
   padding-inline: var(--gutter);
 }
 .section-space {
-  padding-block: var(--section-space);
+  /* Deux demi-espaces adjacents forment un seul intervalle de section. */
+  padding-block: calc(var(--section-gap) / 2);
 }
 .prose {
   max-width: var(--measure);
