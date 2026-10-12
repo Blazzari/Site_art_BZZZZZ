@@ -4,8 +4,6 @@ export const artist = {
   role: 'Artiste',
   city: 'Paris',
   email: 'bzzzz.contact@gmail.com',
-  phone: '+33 6 45 17 23 76',
-  phoneLink: '+33645172376',
   instagram: 'B.ZZZZZZZZZZ',
 };
 
