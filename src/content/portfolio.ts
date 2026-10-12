@@ -52,7 +52,7 @@ export const projects = {
   },
   film: {
     title: 'Documentaire sur le street art et B.ZZZZ',
-    place: 'Paris, 2024',
+    place: 'Paris XX, 2024',
     text: 'En 2024, Martin Gonzalez et son équipe m’ont suivie pendant deux jours afin de réaliser un documentaire de vingt minutes sur mes fleurs et le street art.',
   },
   bee: {
