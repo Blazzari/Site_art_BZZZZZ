@@ -1,6 +1,8 @@
 /* Dimensions communes aux photos seules et aux carrousels. */
 :root {
   --media-width: 60rem;
+  /* Un ton papier commun au cadre et à la vue agrandie. */
+  --gallery-surface: color-mix(in srgb, var(--paper) 98%, var(--ink));
   --media-height: clamp(16rem, min(52svh, 55vw + 5rem), 30rem);
 }
 /* Cadre stable : les originaux restent entiers, quelle que soit leur proportion. */
@@ -10,8 +12,8 @@
   width: 100%;
   max-width: var(--media-width);
   overflow: hidden;
-  border-radius: 8px;
-  background: #ebeae6;
+  border-radius: 4px;
+  background: var(--gallery-surface);
   margin-top: var(--gap-media);
   --gallery-height: var(--media-height);
 }
@@ -60,8 +62,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem clamp(0.5rem, 2vw, 1rem);
-  border-top: 1px solid rgb(0 0 0 / 6%);
+  padding: 0.75rem clamp(0.5rem, 2vw, 1rem);
+  background: var(--paper);
   flex-wrap: wrap;
 }
 .gallery-controls[hidden] {
@@ -166,8 +168,8 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: #ebeae6;
-  border-radius: 8px;
+  background: var(--gallery-surface);
+  border-radius: 4px;
   overflow: hidden;
 }
 .gallery-dialog .gallery-track {
