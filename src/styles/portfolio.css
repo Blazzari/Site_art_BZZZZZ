@@ -317,3 +317,9 @@
 .section-title + * {
   margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
+/* Keep the footer action above the browser toolbar on touch screens. */
+@media (max-width: 48rem), (hover: none) and (pointer: coarse) {
+  .closing {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
+  }
+}

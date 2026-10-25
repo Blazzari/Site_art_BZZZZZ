@@ -12,8 +12,8 @@ import '../styles/photo-wall.css';
 >
   <section class="photo-page shell" aria-labelledby="wall-title">
     <header class="photo-heading">
-      <p class="photo-eyebrow">La galerie · {allArtworkPhotos.length} images</p>
       <h1 id="wall-title">Ça fleurit partout !</h1>
+      <p class="photo-count">Galerie · {allArtworkPhotos.length} images</p>
     </header>
     <div class="photo-wall">
       {allArtworkPhotos.map((photo, index) => (
