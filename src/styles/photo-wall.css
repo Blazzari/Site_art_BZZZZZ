@@ -1,0 +1,149 @@
+.photo-page.shell {
+  width: 100%;
+  max-width: 100rem;
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem);
+}
+.photo-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.photo-eyebrow {
+  order: 2;
+  font-size: 0.8rem;
+}
+.photo-heading h1 {
+  font-size: clamp(2rem, 4.5vw, 4.5rem);
+  font-weight: 550;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+/* Une mosaïque en ordre de lecture, avec une respiration plus ample toutes les neuf photos. */
+.photo-wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: clamp(6rem, 10vw, 10rem);
+  gap: clamp(0.65rem, 1.2vw, 1.25rem);
+}
+.photo-entry {
+  display: block;
+  grid-row: span 2;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  background: #ede9e1;
+  isolation: isolate;
+  cursor: zoom-in;
+}
+.photo-entry:nth-child(9n + 1) {
+  grid-column: span 2;
+  grid-row: span 4;
+}
+.photo-entry img,
+.photo-entry svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.photo-entry:focus-visible {
+  outline-offset: 4px;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .photo-entry:hover img,
+  .photo-entry:hover svg {
+    transform: scale(1.035);
+  }
+}
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 4rem 1.25rem 1.25rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.photo-viewer[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.photo-viewer::backdrop {
+  background: #0009;
+}
+.photo-viewer-image {
+  min-height: 0;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.photo-viewer-image img,
+.photo-viewer-image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.photo-viewer button {
+  appearance: none;
+  background: transparent;
+  color: inherit;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.photo-viewer button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.photo-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+.photo-viewer-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+body:has(.photo-viewer[open]) {
+  overflow: hidden;
+}
+@media (max-width: 48rem) {
+  .photo-heading {
+    display: block;
+  }
+  .photo-eyebrow {
+    margin-bottom: 0.65rem;
+  }
+  .photo-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: clamp(6rem, 24vw, 11rem);
+    gap: 0.65rem;
+  }
+  .photo-entry:nth-child(9n + 1) {
+    grid-row: span 3;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-entry img,
+  .photo-entry svg {
+    transition: none;
+  }
+}

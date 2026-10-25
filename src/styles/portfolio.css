@@ -26,7 +26,7 @@
 .mobile-menu summary {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: 0.4rem;
   min-height: 44px;
   list-style: none;
   cursor: pointer;
@@ -34,11 +34,18 @@
 .mobile-menu summary::-webkit-details-marker {
   display: none;
 }
-.mobile-menu summary > span {
-  line-height: 1;
+.menu-toggle-icon {
+  display: block;
+  flex-shrink: 0;
+  position: relative;
+  top: -1px;
 }
-.mobile-menu[open] summary > span {
-  transform: rotate(45deg);
+.menu-icon-close,
+.mobile-menu[open] .menu-icon-plus {
+  display: none;
+}
+.mobile-menu[open] .menu-icon-close {
+  display: block;
 }
 /* Le voile reste derrière le volet, dans le contexte du header. */
 .menu-backdrop {
@@ -201,17 +208,9 @@
   width: 100%;
   margin: 0;
 }
-.workshops .shell > figure {
-  width: 100%;
-  margin: var(--gap-media) auto 0;
-  padding: var(--space-2);
-  background: var(--photo-mat);
-}
 .paris-description,
-.workshop-text,
 .project-description,
-.project-location,
-.film .prose {
+.project-location {
   margin-top: var(--gap-copy);
 }
 .closing {
@@ -236,10 +235,6 @@
   .photo-grid figure:last-child:nth-child(odd) {
     grid-column: auto;
     width: 100%;
-  }
-  .workshop-gallery,
-  .film-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 75rem) {
@@ -270,6 +265,7 @@
 
 /* Une rubrique commune, alimentée par la liste artProjects. */
 .art-project {
+  scroll-margin-top: 0;
   margin-top: var(--space-4);
 }
 .art-project + .art-project {
@@ -279,8 +275,8 @@
   width: 100%;
   max-width: var(--media-width);
   margin-top: var(--gap-media);
-  background: #ebeae6;
-  border-radius: 8px;
+  background: var(--gallery-surface);
+  border-radius: 4px;
   overflow: hidden;
 }
 .project-wide > figure {
@@ -307,4 +303,17 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
+}
+
+/* Les rubriques du menu ont une échelle distincte des titres de contenu. */
+.section-title {
+  max-width: 24ch;
+  font-size: clamp(2.125rem, 1.25rem + 3vw, 4rem);
+  font-weight: 550;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.section-title + * {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }

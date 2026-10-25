@@ -1,0 +1,49 @@
+---
+import Portfolio from '../layouts/Portfolio.astro';
+import Artwork from '../components/Artwork.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+import { allArtworkPhotos } from '../content/gallery';
+import '../styles/photo-wall.css';
+---
+
+<Portfolio
+  title="Ça fleurit partout ! — B.ZZZZ"
+  description="Une promenade en images parmi les fleurs, les murs et les créations de B.ZZZZ."
+>
+  <section class="photo-page shell" aria-labelledby="wall-title">
+    <header class="photo-heading">
+      <p class="photo-eyebrow">La galerie · {allArtworkPhotos.length} images</p>
+      <h1 id="wall-title">Ça fleurit partout !</h1>
+    </header>
+    <div class="photo-wall">
+      {allArtworkPhotos.map((photo, index) => (
+        <a
+          class="photo-entry"
+          href={`${import.meta.env.BASE_URL}images/${photo.file}`}
+          data-photo={index}
+          aria-label={`Agrandir : ${photo.alt}`}
+        >
+          <Artwork photo={photo} eager />
+        </a>
+      ))}
+    </div>
+  </section>
+  <dialog class="photo-viewer" aria-label="Photographie agrandie">
+    <button class="photo-close" aria-label="Fermer">
+      ×
+    </button>
+    <div class="photo-viewer-image"></div>
+    <div class="photo-viewer-controls">
+      <button data-prev aria-label="Photo précédente">
+        <ArrowIcon direction="left" />
+      </button>
+      <p data-count aria-live="polite"></p>
+      <button data-next aria-label="Photo suivante">
+        <ArrowIcon direction="right" />
+      </button>
+    </div>
+  </dialog>
+</Portfolio>
+<script>
+  import '../scripts/photo-wall';
+</script>

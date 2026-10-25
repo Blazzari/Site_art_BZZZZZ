@@ -20,3 +20,35 @@ ferment la vue et rendent le focus au bouton d’ouverture.
 
 À vérifier sur appareil réel : gestes diagonaux et inertie iOS/Android, zoom
 système, lecteur d’écran et confort des commandes avec les barres du navigateur.
+
+## Ajouter un projet
+
+Tous les articles de « Mes projets » sont déclarés dans
+`src/content/art-projects.ts` et rendus par `ArtProject.astro`.
+Le documentaire et les ateliers utilisent le même composant que les autres projets.
+
+1. Ajouter les images dans `public/images/<nom-du-projet>/` et les déclarer
+   avec leurs dimensions et descriptions dans `src/content/gallery.ts`.
+2. Ajouter un objet dans `artProjects` : `id` unique et stable, `title`,
+   `location`, `description`, `photos` (liste du catalogue).
+3. Placer cet objet à la position souhaitée : l’ordre de la liste est l’ordre
+   d’affichage. Atelier, Mur, Documentaire, BEE est l’ordre validé en attendant
+   la confirmation des dates ; aucun tri chronologique n’est déduit des textes.
+4. Lancer `pnpm validate` puis vérifier l’aperçu mobile et desktop.
+
+Une photo produit une image fixe ; plusieurs produisent un carrousel avec
+les commandes communes. Une liste vide conserve uniquement le texte.
+Les ancres `#documentaire` et `#ateliers` restent disponibles sur leurs articles.
+La navigation principale pointe vers la rubrique `#projets` ; aucun lien
+à ajouter manuellement pour chaque nouveau projet.
+
+## Galerie transversale
+
+La section « Ça fleurit partout ! » suit « Mes projets ». Elle réutilise le
+carrousel commun et `allArtworkPhotos`, une vue dérivée de `gallery` qui exclut
+la collection `portrait` et déduplique par chemin de fichier. Aucun fichier
+image n’est copié. Les nouvelles collections sont incluses automatiquement.
+
+## Page galerie
+
+L’entrée 03 du menu ouvre `galerie/`. La page utilise `allArtworkPhotos`, sans portrait ni duplication des fichiers. `photo-wall.css` gère les colonnes adaptatives ; `photo-wall.ts` gère la vue agrandie, les flèches et le balayage tactile. Les descriptions restent dans les alternatives accessibles, sans légendes visibles. Le layout et les composants Header et Footer sont partagés entre les pages. Les liens internes respectent BASE_URL pour GitHub Pages.

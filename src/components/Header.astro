@@ -1,25 +1,60 @@
 ---
 import ArrowIcon from './ArrowIcon.astro';
 import { artist, navigation } from '../content/portfolio';
+const base = import.meta.env.BASE_URL;
+const onGallery = Astro.url.pathname.replace(/\/$/, '').endsWith('/galerie');
+const href = (id: string) =>
+  id === 'galerie' ? `${base}galerie/` : `${onGallery ? base : ''}#${id}`;
 ---
 
 <header class="site-header">
-  <a class="home-link" href="#accueil">
+  <a class="home-link" href={`${base}#accueil`}>
     {artist.name}
   </a>
   <nav class="desktop-nav" aria-label="Navigation principale">
     {navigation.map((item) => (
-      <a href={`#${item.id}`}>{item.label}</a>
+      <a
+        href={href(item.id)}
+        aria-current={onGallery && item.id === 'galerie' ? 'page' : undefined}
+      >
+        {item.label}
+      </a>
     ))}
   </nav>
   <details class="mobile-menu">
     <summary aria-label="B.ZZZZ — menu de navigation">
-      {artist.name} <span aria-hidden="true">+</span>
+      {artist.name}{' '}
+      <svg
+        class="menu-toggle-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          class="menu-icon-plus"
+          d="M8 2v12M2 8h12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+        <path
+          class="menu-icon-close"
+          d="M2.884 2.884 13.116 13.116M13.116 2.884 2.884 13.116"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+      </svg>
     </summary>
     <div class="menu-backdrop" aria-hidden="true"></div>
     <nav aria-label="Navigation mobile">
       {navigation.map((item, i) => (
-        <a href={`#${item.id}`}>
+        <a
+          href={href(item.id)}
+          aria-current={onGallery && item.id === 'galerie' ? 'page' : undefined}
+        >
           <span class="menu-index" aria-hidden="true">
             0{i + 1}
           </span>

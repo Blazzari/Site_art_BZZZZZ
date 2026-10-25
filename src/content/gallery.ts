@@ -193,3 +193,13 @@ export const gallery = {
     },
   ],
 } satisfies Record<string, ArtworkPhoto[]>;
+
+/** Vue transversale du catalogue : sans portrait ni fichier répété. */
+export const allArtworkPhotos: ArtworkPhoto[] = [
+  ...new Map(
+    Object.entries(gallery)
+      .filter(([collection]) => collection !== 'portrait')
+      .flatMap(([, photos]) => photos)
+      .map((photo) => [photo.file, photo] as const),
+  ).values(),
+];

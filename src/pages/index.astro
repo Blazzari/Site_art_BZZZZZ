@@ -11,15 +11,15 @@ import { artist, about, projects } from '../content/portfolio';
 ---
 
 <Portfolio>
-  <div id="accueil">
-    <h1 class="sr-only">{artist.name} — Artiste</h1>
-  </div>
+  <h1 class="sr-only">{artist.name} — Artiste</h1>
   <section
     class="about shell section-space"
     id="a-propos"
     aria-labelledby="about-heading"
   >
-    <h2 id="about-heading">À propos de moi</h2>
+    <h2 id="about-heading" class="section-title">
+      À propos de moi
+    </h2>
     <div class="about-composition">
       <div class="prose about-description">
         {about.paragraphs.map((text) => (
@@ -104,54 +104,15 @@ import { artist, about, projects } from '../content/portfolio';
   </section>
 
   <section
-    class="film shell section-space"
-    id="documentaire"
-    aria-labelledby="film-heading"
-  >
-    <div>
-      <h2 id="film-heading">{projects.film.title}</h2>
-      <p class="project-location">
-        <ContactIcon name="location" />
-        <span>{projects.film.place}</span>
-      </p>
-      <p class="prose">{projects.film.text}</p>
-    </div>
-    <Gallery photos={gallery.documentaire} label={projects.film.title} />
-  </section>
-
-  <section
-    class="workshops section-space"
-    id="ateliers"
-    aria-labelledby="workshop-heading"
-  >
-    <div class="shell">
-      <h2 id="workshop-heading">{projects.workshop.title}</h2>
-      <p class="project-location">
-        <ContactIcon name="location" />
-        <span>{projects.workshop.place}</span>
-      </p>
-      <p class="prose workshop-text">{projects.workshop.text}</p>
-      <Gallery photos={gallery.ateliers} label={projects.workshop.title} />
-    </div>
-  </section>
-
-  <section
     id="projets"
     class="shell section-space projects"
     aria-labelledby="projects-heading"
   >
-    <h2 id="projects-heading">Ça fleurit partout</h2>
+    <h2 id="projects-heading" class="section-title">
+      Mes projets
+    </h2>
     {artProjects.map((project) => (
       <ArtProject project={project} />
     ))}
   </section>
-
-  <footer class="shell section-space closing">
-    <h2>Merci !</h2>
-    <div class="footer-bottom">
-      <a href="#accueil">
-        Retour en haut <ArrowIcon direction="up" />
-      </a>
-    </div>
-  </footer>
 </Portfolio>

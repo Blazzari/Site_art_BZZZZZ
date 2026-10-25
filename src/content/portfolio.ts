@@ -9,9 +9,8 @@ export const artist = {
 
 export const navigation = [
   { id: 'a-propos', label: 'À propos de moi' },
-  { id: 'documentaire', label: 'Documentaire' },
-  { id: 'ateliers', label: 'Ateliers' },
-  { id: 'projets', label: 'Ça fleurit partout' },
+  { id: 'projets', label: 'Mes projets' },
+  { id: 'galerie', label: 'Ça fleurit partout !' },
 ];
 
 export const about = {
@@ -36,26 +35,5 @@ export const projects = {
       'Être fleur bleue',
       'Arriver comme une fleur',
     ],
-  },
-  wall: {
-    title: 'Mur des curiosités',
-    place: 'Paris XIX',
-    text: 'Vase en terre cuite, fleurs en plâtre et peinture acrylique.',
-  },
-  workshop: {
-    title: 'Atelier d’initiation et de création',
-    place: 'Paris X',
-    text: 'J’organise également des ateliers pour petits et grands afin de créer, de se rassembler autour de l’art et de construire de beaux bouquets muraux où chacun met sa graine.',
-  },
-  film: {
-    title: 'Documentaire sur le street art et B.ZZZZ',
-    place: 'Paris XX, 2024',
-    text: 'Martin Gonzalez et son équipe m’ont suivie pendant deux jours afin de réaliser un documentaire de vingt minutes sur mes fleurs et le street art.',
-  },
-  bee: {
-    title: 'BEE Project',
-    subtitle: 'Bee Positive',
-    place: 'Utrecht, Pays-Bas — 2022',
-    text: 'Réalisation d’un mur pour sensibiliser à l’environnement et aux abeilles dans la ville d’Utrecht.',
   },
 };
