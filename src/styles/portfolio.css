@@ -215,11 +215,11 @@
 }
 .closing {
   border-top: 1px solid var(--line);
+  padding-bottom: calc(
+    var(--section-gap) / 2 + env(safe-area-inset-bottom, 0px)
+  );
 }
-.footer-bottom {
-  margin-top: var(--space-4);
-}
-.footer-bottom a {
+.back-to-top {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
